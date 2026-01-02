@@ -6,6 +6,8 @@ import { Spotlight } from "@/components/ui/spotlight"
 import { Terminal } from "@/components/ui/terminal"
 import { Download, Mail } from "lucide-react"
 
+const BASE_PATH = '/Personal-Portfolio'
+
 export function SplineSceneBasic() {
   return (
     <Card className="w-full min-h-[700px] bg-black/[0.96] relative overflow-hidden">
@@ -35,7 +37,7 @@ export function SplineSceneBasic() {
           {/* Action Buttons */}
           <div className="flex gap-4 flex-wrap pt-2">
             <a
-              href="/resume.pdf"
+              href={`${BASE_PATH}/resume.pdf`}
               download="Keegan_May_Resume.pdf"
               className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all font-medium shadow-lg hover:shadow-blue-500/50"
             >
