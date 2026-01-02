@@ -6,7 +6,28 @@ import { Spotlight } from "@/components/ui/spotlight"
 import { Terminal } from "@/components/ui/terminal"
 import { Download, Mail } from "lucide-react"
 
-const BASE_PATH = '/Personal-Portfolio'
+const handleResumeDownload = async () => {
+  try {
+    const basePath = '/Personal-Portfolio'
+    const response = await fetch(`${basePath}/resume.pdf`)
+    if (!response.ok) {
+      throw new Error('Failed to fetch resume')
+    }
+    const blob = await response.blob()
+    const url = window.URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = 'Keegan_May_Resume.pdf'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    window.URL.revokeObjectURL(url)
+  } catch (error) {
+    console.error('Error downloading resume:', error)
+    // Fallback: try direct link
+    window.open('/Personal-Portfolio/resume.pdf', '_blank')
+  }
+}
 
 export function SplineSceneBasic() {
   return (
@@ -36,14 +57,13 @@ export function SplineSceneBasic() {
 
           {/* Action Buttons */}
           <div className="flex gap-4 flex-wrap pt-2">
-            <a
-              href={`${BASE_PATH}/resume.pdf`}
-              download="Keegan_May_Resume.pdf"
+            <button
+              onClick={handleResumeDownload}
               className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all font-medium shadow-lg hover:shadow-blue-500/50"
             >
               <Download className="w-5 h-5" />
               Download Resume
-            </a>
+            </button>
             <button
               onClick={() => {
                 const element = document.getElementById('contact')
