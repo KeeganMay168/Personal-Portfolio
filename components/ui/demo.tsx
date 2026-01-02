@@ -7,26 +7,38 @@ import { Terminal } from "@/components/ui/terminal"
 import { Download, Mail } from "lucide-react"
 
 const handleResumeDownload = async () => {
-  try {
-    const basePath = '/Personal-Portfolio'
-    const response = await fetch(`${basePath}/resume.pdf`)
-    if (!response.ok) {
-      throw new Error('Failed to fetch resume')
+  const basePath = '/Personal-Portfolio'
+  const pathsToTry = [
+    `${basePath}/resume.pdf`,
+    '/resume.pdf',
+    './resume.pdf',
+    'resume.pdf'
+  ]
+
+  for (const path of pathsToTry) {
+    try {
+      const response = await fetch(path)
+      if (response.ok) {
+        const blob = await response.blob()
+        const url = window.URL.createObjectURL(blob)
+        const link = document.createElement('a')
+        link.href = url
+        link.download = 'Keegan_May_Resume.pdf'
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+        window.URL.revokeObjectURL(url)
+        return
+      }
+    } catch (error) {
+      // Try next path
+      continue
     }
-    const blob = await response.blob()
-    const url = window.URL.createObjectURL(blob)
-    const link = document.createElement('a')
-    link.href = url
-    link.download = 'Keegan_May_Resume.pdf'
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-    window.URL.revokeObjectURL(url)
-  } catch (error) {
-    console.error('Error downloading resume:', error)
-    // Fallback: try direct link
-    window.open('/Personal-Portfolio/resume.pdf', '_blank')
   }
+  
+  // If all fetch attempts fail, try opening in new tab
+  console.error('All download attempts failed, trying direct link')
+  window.open(`${basePath}/resume.pdf`, '_blank')
 }
 
 export function SplineSceneBasic() {
