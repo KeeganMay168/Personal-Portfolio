@@ -30,7 +30,7 @@ const handleResumeDownload = async () => {
         window.URL.revokeObjectURL(url)
         return
       }
-    } catch (error) {
+    } catch {
       // Try next path
       continue
     }
