@@ -64,6 +64,19 @@ export function ExperienceSection() {
         "Trained 30+ researchers on semiconductor equipment for metrology, etch, and deposition",
         "Performed experimental analysis optimizing etch rate and uniformity of reactive-ion etch (RIE) processes"
       ]
+    },
+    {
+      title: "Undergraduate Researcher - Additive Manufacturing",
+      company: "Texas A&M Dept. of Industrial & Systems Engineering",
+      location: "College Station, Texas",
+      period: "February 2025 – Present",
+      type: "research",
+      highlights: [
+        "Conducting research on binder jet additive manufacturing techniques and composite materials",
+        "Designed and fabricated test specimens using binder jet printing technology",
+        "Analyzing mechanical properties of printed composites through material characterization and testing",
+        "Optimizing binder jet process parameters to improve part quality and structural integrity"
+      ]
     }
   ]
 
