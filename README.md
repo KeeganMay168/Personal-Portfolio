@@ -1,7 +1,3 @@
-# Interactive 3D Portfolio
-
-A modern portfolio website with interactive 3D scenes powered by Spline.
-
 ## Tech Stack
 
 - **Next.js 15** - React framework with App Router
